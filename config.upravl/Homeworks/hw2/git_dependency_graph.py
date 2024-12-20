@@ -3,7 +3,7 @@ import zlib
 import argparse
 from graphviz import Digraph
 
-
+#class
 class GitDependencyGraph:
     def __init__(self, repo_path, output_path, graphviz_path):
         self.repo_path = repo_path
