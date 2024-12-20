@@ -2,18 +2,18 @@ import unittest
 import os
 import tempfile
 from zipfile import ZipFile
-from Emulator import ZipEmulator  # Импортируем эмулятор из основной программы
+from Emulator import ZipEmulator  # Импортируем эмулятор из программы
 
 class TestZipEmulator(unittest.TestCase):
 
     def setUp(self):
-        # Создаем временный zip-файл для каждого теста
+        # Создаем zip-файл для каждого теста
         self.temp_dir = tempfile.TemporaryDirectory()
         self.zip_file_path = os.path.join(self.temp_dir.name, "test_files.zip")
         with ZipFile(self.zip_file_path, 'w') as myzip:
             pass
 
-        # Экземпляр эмулятора с временным zip-файлом
+        # Экземпляр эмулятора с временным zip-файлом.
         self.emulator = ZipEmulator(self.zip_file_path)
 
     def test_ls_empty_directory(self):
@@ -28,14 +28,14 @@ class TestZipEmulator(unittest.TestCase):
         self.assertIn("file1.txt", output[0])
 
     def test_cd_and_ls(self):
-        # Тест перехода в подкаталог и команды ls
+        # Тест перехода в каталог и команды ls
         self.emulator.run("touch folder1/file2.txt")
         self.emulator.run("cd folder1")
         output = self.emulator.run("ls")
         self.assertIn("file2.txt", output[0])
 
     def test_cd_nonexistent_directory(self):
-        # Тест попытки перехода в несуществующий каталог
+        # Тест попытки перехода в каталог
         self.emulator.run("cd nonexistent")
         output = self.emulator.run("ls")
         self.assertEqual(output, [""])  # Пустая директория, т.к. переход не удался
