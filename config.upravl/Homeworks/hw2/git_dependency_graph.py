@@ -21,8 +21,8 @@ class GitDependencyGraph:
     def read_object(self, sha):
         """Читает объект Git из .git/objects."""
         git_dir = self.get_git_dir()
-        obj_dir = os.path.join(git_dir, "objects", sha[:2])  # Первые два символа — подпапка
-        obj_path = os.path.join(obj_dir, sha[2:])  # Остальная часть — имя файла
+        obj_dir = os.path.join(git_dir, "objects", sha[:2])  # Первые два символа это подпапка
+        obj_path = os.path.join(obj_dir, sha[2:])  # Остальная часть это имя файла
         if not os.path.isfile(obj_path):
             print(f"Пропущен отсутствующий объект {sha}. Возможно, репозиторий повреждён.")
             return None
